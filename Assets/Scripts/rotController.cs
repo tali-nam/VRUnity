@@ -20,6 +20,6 @@ public class rotController : MonoBehaviour
 
         float normalizedRotation = (rotationY <= 180) ? (rotationY / 180f) * 100 : ((360 - rotationY) / 180f) * 100;
 
-        Debug.Log("Normalized Rotation (Y-axis): " + normalizedRotation);
+        //Debug.Log("Normalized Rotation (Y-axis): " + normalizedRotation);
     }
 }

@@ -32,7 +32,7 @@ public class getDressed : MonoBehaviour
         }
         else
         {
-            Debug.Log("Deactivated");
+            //Debug.Log("Deactivated");
             target.SetActive(false);
         }
 

@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class moveToMatchHead : MonoBehaviour
 {
-    private bool moveComplete = false;
+    public bool moveComplete = false;
 
     public GameObject headObject;
     public float timeUntilMove = 5.0f;
+
+    public GameObject startUI;
+    public GameObject[] lights;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        startUI.SetActive(true);
     }
 
     // Update is called once per frame
@@ -21,6 +24,12 @@ public class moveToMatchHead : MonoBehaviour
     {
         if (moveComplete)
         {
+            startUI.SetActive(false);
+            foreach (GameObject light in lights)
+            {
+      
+                light.SetActive(true);
+            }
             return; //we are done, no need to do anything else!
         }
 

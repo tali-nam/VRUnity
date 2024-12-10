@@ -38,7 +38,7 @@ public class moveToMatchHead : MonoBehaviour
             Debug.Log("we are moving the world to match the users head NOW!");
 
             Vector3 newPos = this.headObject.transform.position;
-            newPos.y = 0; //don't adjust for y (height)
+            newPos.y = 0+0.42f; //don't adjust for y (height)
 
             this.transform.position = newPos; //set the position of the parent that holds all the environmental objects. 
 

@@ -55,7 +55,7 @@ public class HighLight : MonoBehaviour
         else
         {
             //check other options to see if selected
-            if (otherOptions.Length > 0)
+            if (otherOptions.Length <= 0)
             {
                 isSelected = true;
             }
@@ -74,6 +74,7 @@ public class HighLight : MonoBehaviour
                         noOthers = false;
 
                     }
+                    j++;
                 }
                 if (noOthers)
                 {

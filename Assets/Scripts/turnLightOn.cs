@@ -5,7 +5,7 @@ using UnityEngine;
 public class turnLightOn : MonoBehaviour
 {
     private Light thisLight;
-    public int brightness;
+    public float brightness;
     public float timeToTurnOn; // Use float for more precise timing
     public GameObject move;
 

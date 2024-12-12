@@ -6,8 +6,13 @@ public class HighLight : MonoBehaviour
 {
     Renderer r;
     public Color emissiveColor;
+    public Color baseColor;
     public bool isSelected;
+    public bool changeColor;
     public GameObject[] otherOptions;
+
+    private Color originalEmissive;
+    private Color originalColor;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +22,17 @@ public class HighLight : MonoBehaviour
         if(r==null){
             Debug.LogError("couldn't find a renderer component among the children!");
         }
+
+        if (r.material.HasProperty("_EmissionColor"))
+        {
+            originalEmissive = r.material.GetColor("_EmissionColor");
+        }
+        else
+        {
+            originalEmissive = new Color(0.0f, 0.0f, 0.0f); 
+        }
+
+        originalColor = r.material.color;
     }
 
     // Update is called once per frame
@@ -27,14 +43,26 @@ public class HighLight : MonoBehaviour
             Debug.Log("selected");
             r.material.EnableKeyword("_EMISSION");
             r.material.SetColor("_EmissionColor", emissiveColor);
+            if (changeColor)
+            {
+                SetMaterialColor(baseColor);
+            }
         }
         
     }
 
+    private void SetMaterialColor(Color baseCol)
+    {
+        if (r != null)
+        {
+            r.material.color = baseCol; // Set the base color
+        }
+    }
+
     public void Highlight()
     {
-        Debug.Log("highlight");
-        r.material.EnableKeyword("_EMISSION"); 
+        SetMaterialColor(baseColor);
+        r.material.EnableKeyword("_EMISSION");
         r.material.SetColor("_EmissionColor",emissiveColor);
         handleClick();
     }
@@ -42,7 +70,12 @@ public class HighLight : MonoBehaviour
     public void NoHighLight()
     {
         Debug.Log("no highlight");
-        r.material.SetColor("_EmissionColor",new Color(0.0f,0.0f,0.0f));
+        r.material.SetColor("_EmissionColor",originalEmissive);
+        if (changeColor)
+        {
+            SetMaterialColor(originalColor);
+
+        }
     }
 
     public void handleClick()

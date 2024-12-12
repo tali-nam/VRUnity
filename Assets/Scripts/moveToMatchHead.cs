@@ -11,12 +11,18 @@ public class moveToMatchHead : MonoBehaviour
 
     public GameObject startUI;
     public GameObject[] lights;
+    public GameObject[] invisible;
 
 
     // Start is called before the first frame update
     void Start()
     {
         startUI.SetActive(true);
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.enabled = false; // Disable visibility for all renderers
+        }
     }
 
     // Update is called once per frame
@@ -29,6 +35,19 @@ public class moveToMatchHead : MonoBehaviour
             {
       
                 light.SetActive(true);
+            }
+            Renderer[] renderers = GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.enabled = true; // Disable visibility for all renderers
+            }
+            foreach (GameObject offObject in invisible)
+            {
+                Renderer[] offRenderers = offObject.GetComponentsInChildren<Renderer>();
+                foreach (Renderer renderer in offRenderers)
+                {
+                    renderer.enabled = false; // Disable visibility for renderers in invisible objects
+                }
             }
             return; //we are done, no need to do anything else!
         }

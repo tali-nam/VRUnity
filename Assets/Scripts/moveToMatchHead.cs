@@ -12,6 +12,8 @@ public class moveToMatchHead : MonoBehaviour
     public GameObject startUI;
     public GameObject[] lights;
     public GameObject[] invisible;
+    public AudioClip music;
+    private AudioSource audioSource;
 
     public float offset;
 
@@ -25,6 +27,10 @@ public class moveToMatchHead : MonoBehaviour
         {
             renderer.enabled = false; // Disable visibility for all renderers
         }
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = music;
+        audioSource.loop = true;
+        audioSource.playOnAwake = false;
     }
 
     // Update is called once per frame
@@ -64,6 +70,14 @@ public class moveToMatchHead : MonoBehaviour
             this.transform.position = newPos; //set the position of the parent that holds all the environmental objects. 
 
             moveComplete = true;
+            if (music != null)
+            {
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("No AudioClip assigned to 'music'!");
+            }
 
         }
 
